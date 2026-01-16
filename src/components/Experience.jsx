@@ -34,9 +34,10 @@ const Experience = () => {
     return (
         <section id="experience" className="container">
             <motion.h2
-                initial={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
                 className="section-title"
             >
                 Professional Experience
@@ -45,10 +46,10 @@ const Experience = () => {
                 {experiences.map((exp, i) => (
                     <motion.div
                         key={exp.company}
-                        initial={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: i * 0.1 }}
                         style={{ marginBottom: '40px' }}
                     >
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', alignItems: 'baseline', flexWrap: 'wrap' }}>

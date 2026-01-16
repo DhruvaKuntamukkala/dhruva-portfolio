@@ -13,7 +13,6 @@ import CustomCursor from './components/CustomCursor';
 function App() {
   return (
     <div className="app">
-      <CustomCursor />
       <Header />
       <main>
         <Hero />

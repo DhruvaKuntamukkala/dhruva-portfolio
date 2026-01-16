@@ -65,19 +65,20 @@ const Projects = () => {
     return (
         <section id="projects" className="container">
             <motion.div
-                initial={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
             >
                 <h2 className="section-title">Notable Projects</h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
                     {projects.map((project, i) => (
                         <motion.div
                             key={project.title}
-                            initial={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: i * 0.1 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
                             style={{
                                 display: 'grid',
                                 gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',

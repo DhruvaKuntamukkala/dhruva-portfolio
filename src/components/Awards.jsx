@@ -21,9 +21,10 @@ const Awards = () => {
     return (
         <section id="awards" className="container">
             <motion.h2
-                initial={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
                 className="section-title"
             >
                 Awards & Achievements
@@ -32,10 +33,10 @@ const Awards = () => {
                 {awards.map((award, i) => (
                     <motion.div
                         key={award.event}
-                        initial={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: i * 0.1 }}
                         style={{
                             padding: '48px',
                             border: '1px solid var(--secondary-color)',

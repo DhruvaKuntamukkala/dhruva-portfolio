@@ -29,9 +29,10 @@ const Skills = () => {
     return (
         <section id="skills" className="container" style={{ padding: '100px 0' }}>
             <motion.div
-                initial={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
             >
                 <h2 className="section-title">Technical Expertise</h2>
                 <p style={{ color: 'var(--text-secondary)', marginBottom: '60px', fontSize: '1.1rem', maxWidth: '600px' }}>

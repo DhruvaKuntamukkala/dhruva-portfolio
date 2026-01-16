@@ -20,9 +20,10 @@ const Education = () => {
     return (
         <section id="education" className="container">
             <motion.h2
-                initial={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
                 className="section-title"
             >
                 Education
@@ -31,10 +32,10 @@ const Education = () => {
                 {education.map((item, i) => (
                     <motion.div
                         key={item.school}
-                        initial={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: i * 0.1 }}
                         style={{
                             padding: '48px',
                             border: '1px solid var(--glass-border)',

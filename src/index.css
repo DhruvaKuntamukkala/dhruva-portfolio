@@ -40,6 +40,11 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -53,14 +58,13 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   transition: background-color 0.3s ease;
-  cursor: none;
 }
 
-/* Ensure interactive elements also hide cursor */
+/* Updated cursor for accessibility */
 a,
 button,
 .btn {
-  cursor: none !important;
+  cursor: pointer !important;
 }
 
 @media (max-width: 1024px) {

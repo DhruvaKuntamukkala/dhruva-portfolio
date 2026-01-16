@@ -6,10 +6,10 @@ const About = () => {
         <section id="about" className="container">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '80px', alignItems: 'center' }}>
                 <motion.div
-                    initial={{ opacity: 1, y: 0 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                 >
                     <h2 className="section-title">About Me</h2>
                     <p style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '24px', lineHeight: 1.6 }}>
@@ -21,10 +21,10 @@ const About = () => {
                 </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 1, y: 0 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}
                 >
                     <motion.div
