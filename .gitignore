@@ -22,3 +22,17 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables — NEVER commit these
+.env
+.env.*
+!.env.example
+resume-chatbot-backend/.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# PDF files (keep locally, don't push)
+resume-chatbot-backend/*.pdf

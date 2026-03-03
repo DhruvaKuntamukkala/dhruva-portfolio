@@ -1,47 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isHovering, setIsHovering] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-
     const cursorX = useSpring(0, { stiffness: 500, damping: 28 });
     const cursorY = useSpring(0, { stiffness: 500, damping: 28 });
+    const dotX = useSpring(0, { stiffness: 700, damping: 35 });
+    const dotY = useSpring(0, { stiffness: 700, damping: 35 });
+    const isHovering = useRef(false);
+    const circleRef = useRef(null);
 
     useEffect(() => {
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (isTouchDevice || window.innerWidth <= 1024) return;
 
-        setIsVisible(true);
-        const handleMouseMove = (e) => {
+        document.body.style.cursor = 'none';
+
+        const move = (e) => {
             cursorX.set(e.clientX - 16);
             cursorY.set(e.clientY - 16);
-            setMousePosition({ x: e.clientX, y: e.clientY });
+            dotX.set(e.clientX - 4);
+            dotY.set(e.clientY - 4);
         };
 
-        const handleHover = (e) => {
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('.btn')) {
-                setIsHovering(true);
-            } else {
-                setIsHovering(false);
+        const hover = (e) => {
+            const el = e.target;
+            const hovering = el.tagName === 'A' || el.tagName === 'BUTTON' || el.closest('.btn') || el.closest('a') || el.closest('button');
+            isHovering.current = !!hovering;
+            if (circleRef.current) {
+                circleRef.current.style.transform = hovering ? 'scale(2)' : 'scale(1)';
+                circleRef.current.style.background = hovering ? 'rgba(139,92,246,0.12)' : 'transparent';
+                circleRef.current.style.borderColor = hovering ? 'rgba(139,92,246,0.7)' : 'rgba(139,92,246,0.5)';
             }
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseover', handleHover);
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseover', hover);
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseover', handleHover);
+            document.body.style.cursor = '';
+            window.removeEventListener('mousemove', move);
+            window.removeEventListener('mouseover', hover);
         };
-    }, [cursorX, cursorY]);
+    }, [cursorX, cursorY, dotX, dotY]);
 
-    if (!isVisible) return null;
+    // Only render on desktop
+    if (typeof window !== 'undefined' && window.innerWidth <= 1024) return null;
 
     return (
         <>
             <motion.div
+                ref={circleRef}
                 style={{
                     position: 'fixed',
                     left: 0,
@@ -49,29 +57,28 @@ const CustomCursor = () => {
                     width: '32px',
                     height: '32px',
                     borderRadius: '50%',
-                    border: '1px solid var(--secondary-color)',
+                    border: '1px solid rgba(139,92,246,0.5)',
                     pointerEvents: 'none',
                     zIndex: 9999,
                     x: cursorX,
                     y: cursorY,
-                    scale: isHovering ? 2 : 1,
-                    backgroundColor: isHovering ? 'rgba(99, 102, 241, 0.1)' : 'transparent',
+                    transition: 'transform 0.2s, background 0.2s, border-color 0.2s',
                     mixBlendMode: 'difference',
-                    transition: { type: 'spring', damping: 20, stiffness: 200 }
                 }}
             />
             <motion.div
                 style={{
                     position: 'fixed',
-                    left: mousePosition.x - 4,
-                    top: mousePosition.y - 4,
+                    left: 0,
+                    top: 0,
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    backgroundColor: 'var(--secondary-color)',
+                    background: 'var(--purple)',
                     pointerEvents: 'none',
                     zIndex: 9999,
-                    transition: { type: 'spring', damping: 30, stiffness: 300 }
+                    x: dotX,
+                    y: dotY,
                 }}
             />
         </>
